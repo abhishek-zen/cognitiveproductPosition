@@ -30,11 +30,6 @@ const navItems = [
 		href: "/cppa/campaigns",
 		icon: "📈",
 	},
-	{
-		name: "Settings",
-		href: "/cppa/settings",
-		icon: "⚙️",
-	},
 ];
 
 export function Navigation() {
