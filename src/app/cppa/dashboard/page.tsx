@@ -1,4 +1,5 @@
-
+'use client';
+import React from 'react';
 import { Card, CardHeader, CardTitle, CardContent, CardDescription } from '@/components/ui/card';
 import { Table, TableHeader, TableRow, TableHead, TableBody, TableCell } from '@/components/ui/table';
 import { Skeleton } from '@/components/ui/skeleton';
@@ -29,33 +30,15 @@ function DashboardError({ message }: { message: string }) {
   );
 }
 
-export default function CPPADashboardPage() {
-  // This is a Client Component due to the hook usage
-  // "use client" directive is needed for hooks
-  // But in Next.js App Router, page.tsx is server component by default.
-  // So, move the interactive section to an inner Client Component.
-
-  return (
-    <section className="max-w-7xl mx-auto px-4 py-10">
-      <h1 className="text-3xl font-bold tracking-tight mb-2">Dashboard</h1>
-      <p className="text-muted-foreground mb-6 max-w-2xl">
-        Welcome to your CPPA dashboard. View your tailored insights, activity, and quick actions based on your current access level.
-      </p>
-      <DashboardClient />
-    </section>
-  );
-}
-
-'use client';
-import React from 'react';
-
 function DashboardClient() {
   const { data, loading, error } = useDashboardData();
 
   if (loading) return <DashboardLoading />;
   if (error) return <DashboardError message={error} />;
 
-  if (!data) return null;
+  if (!data || !data.cards || !data.tableRows) {
+    return <DashboardError message="No dashboard data available" />;
+  }
 
   return (
     <div>
@@ -124,5 +107,17 @@ function DashboardClient() {
         </Card>
       </div>
     </div>
+  );
+}
+
+export default function CPPADashboardPage() {
+  return (
+    <section className="max-w-7xl mx-auto px-4 py-10">
+      <h1 className="text-3xl font-bold tracking-tight mb-2">Dashboard</h1>
+      <p className="text-muted-foreground mb-6 max-w-2xl">
+        Welcome to your CPPA dashboard. View your tailored insights, activity, and quick actions based on your current access level.
+      </p>
+      <DashboardClient />
+    </section>
   );
 }
