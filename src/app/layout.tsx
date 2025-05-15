@@ -51,7 +51,7 @@ export default function RootLayout({
                     href="/cppa/dashboard"
                     className="flex items-center space-x-2"
                   >
-                    <span className="font-bold text-xl text-blue-600 dark:text-blue-400">CPPA</span>
+                    <span className="font-bold text-xl text-blue-600 dark:text-blue-400">Cognitive Product Positioning Assistant</span>
                   </Link>
                 </div>
 
