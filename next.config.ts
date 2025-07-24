@@ -1,9 +1,14 @@
 import type { NextConfig } from "next";
 
 const nextConfig: NextConfig = {
-  images: {
-    remotePatterns: [new URL('https://images.pexels.com/photos/**')],
-  },
+  /* config options here */
+  remotePatterns: [
+    {
+      protocol: 'https',
+      hostname: 'images.pexels.com',
+      pathname: '/images/**',
+    },
+  ],
 };
 
 export default nextConfig;
